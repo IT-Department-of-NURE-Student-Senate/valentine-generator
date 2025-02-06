@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "NODE_ENV=development tsx watch src/index.ts",
+    "start": "NODE_ENV=production node --run db:generate-migrations && node --run db:apply-migrations && node --run start:prod",
+    "start:prod": "node dist/server.js",
+    "db:generate-migrations": "drizzle-kit generate",
+    "db:apply-migrations": "drizzle-kit push --verbose",
+    "db:drop-migrations": "drizzle-kit drop"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^10.0.2",
+    "@fastify/rate-limit": "^10.2.2",
+    "@oslojs/encoding": "^1.1.0",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.1",
+    "fastify": "^5.2.1",
+    "postgres": "^3.4.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "drizzle-kit": "^0.30.4",
+    "pino-pretty": "^13.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
