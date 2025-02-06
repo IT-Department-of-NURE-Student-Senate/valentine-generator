@@ -27,10 +27,6 @@ export default defineNuxtConfig({
         prefix: 'vi',
         dir: './assets/valentine-icons',
       },
-      {
-        prefix: 'vt',
-        dir: './assets/valentine-templates',
-      },
     ],
   },
   runtimeConfig: {
