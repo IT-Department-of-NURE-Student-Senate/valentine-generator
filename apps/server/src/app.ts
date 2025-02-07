@@ -125,7 +125,7 @@ export class App {
 
         instance.route({
           method: 'GET',
-          url: '/valentines/id',
+          url: '/valentines/:id',
           schema: {
             params: GET_VALENTINE_PARAMS_SCHEMA,
           },

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const GET_VALENTINE_PARAMS_SCHEMA = z.object({
-  id: z.string().length(12).nanoid(),
+  id: z.string().length(12),
 });
 
 type GET_VALENTINE_PARAMS_TYPE = z.infer<typeof GET_VALENTINE_PARAMS_SCHEMA>;
@@ -13,8 +13,7 @@ const CREATE_VALENTINE_SCHEMA = z
         invalid_type_error: 'Indenifier should be string',
         required_error: 'Please provide id',
       })
-      .length(12, 'Identifier should be 12 characters long')
-      .nanoid('Provide valid nanoid'),
+      .length(12, 'Identifier should be 12 characters long'),
     text: z
       .string({
         invalid_type_error: 'Text should be string',
