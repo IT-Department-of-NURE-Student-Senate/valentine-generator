@@ -40,21 +40,35 @@ const buttonFallback = computed(() =>
       }}</CardTitle>
     </CardHeader>
 
-    <CardContent v-if="currentStep === 0">
+    <CardContent class="space-y-2" v-if="currentStep === 0">
       <Textarea
         v-model="data.text"
         class="resize-none"
         placeholder="Введи текст..."
+        maxlength="50"
         autofocus
       />
+      <p class="text-sm text-muted-foreground">Максимум 50 символів</p>
     </CardContent>
 
-    <CardContent v-if="currentStep === 1">
-      <Input v-model="data.to" type="text" placeholder="Введи імʼя..." />
+    <CardContent class="space-y-2" v-if="currentStep === 1">
+      <Input
+        v-model="data.to"
+        type="text"
+        placeholder="Введи імʼя..."
+        maxlength="25"
+      />
+      <p class="text-sm text-muted-foreground">Максимум 25 символів</p>
     </CardContent>
 
     <CardContent v-if="currentStep === 2">
-      <Input v-model="data.from" type="text" placeholder="Введи імʼя..." />
+      <Input
+        v-model="data.from"
+        type="text"
+        placeholder="Введи імʼя..."
+        maxlength="25"
+      />
+      <p class="text-sm text-muted-foreground">Максимум 25 символів</p>
     </CardContent>
     <CardFooter class="inline-flex w-full justify-between items-center gap-3">
       <Button
