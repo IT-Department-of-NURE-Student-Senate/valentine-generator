@@ -5,16 +5,27 @@ import { eq } from 'drizzle-orm';
 import { drizzle, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type { FastifyRequest } from 'fastify';
 import fastify from 'fastify';
+import {
+  serializerCompiler,
+  validatorCompiler,
+  type ZodTypeProvider,
+} from 'fastify-type-provider-zod';
 import postgres from 'postgres';
+import { SESSION_COOKIE_NAME } from './constants.js';
 import * as schema from './db.js';
 import { env } from './env.js';
-import type { AppInstance, InsertValentine } from './types.js';
-import { generateString, setCookie } from './utils.js';
+import {
+  CREATE_VALENTINE_SCHEMA,
+  CREATE_VALENTINE_TYPE,
+  GET_VALENTINE_PARAMS_SCHEMA,
+  GET_VALENTINE_PARAMS_TYPE,
+} from './schemas.js';
+import type { AppInstance } from './types.js';
+import { generateString, setSessionCookie } from './utils.js';
 
 export class App {
   private app: AppInstance;
   private readonly db: PostgresJsDatabase<typeof schema>;
-  private readonly connection: postgres.Sql;
 
   constructor() {
     const connection = postgres({
@@ -31,8 +42,6 @@ export class App {
       casing: 'snake_case',
     });
 
-    this.connection = connection;
-
     this.app = fastify({
       logger: {
         transport: {
@@ -46,6 +55,9 @@ export class App {
   }
 
   private async registerPlugins(): Promise<void> {
+    this.app.setValidatorCompiler(validatorCompiler);
+    this.app.setSerializerCompiler(serializerCompiler);
+
     this.app.register(fastifyCors, {
       origin: ['http://localhost:3000'],
       credentials: true,
@@ -66,22 +78,33 @@ export class App {
   }
 
   private async registerRoutes(): Promise<void> {
-    this.app.register(
+    this.app.withTypeProvider<ZodTypeProvider>().register(
       (instance, opts, next) => {
-        instance.get('/health', (_, reply) => {
-          const data = {
-            uptime: process.uptime(),
-            message: 'Helthy!',
-            data: new Date(),
-          };
+        instance.route({
+          method: 'GET',
+          url: '/health',
+          handler: (_, reply) => {
+            const data = {
+              uptime: process.uptime(),
+              message: 'Helthy!',
+              data: new Date(),
+            };
 
-          return reply.status(200).send(data);
+            return reply.status(200).send(data);
+          },
         });
 
-        instance.post(
-          '/valentines',
-          async (req: FastifyRequest<{ Body: InsertValentine }>, reply) => {
-            const sessionCookie = req.cookies['valentine-session'];
+        instance.route({
+          method: 'POST',
+          url: '/valentines',
+          schema: {
+            body: CREATE_VALENTINE_SCHEMA,
+          },
+          handler: async (
+            req: FastifyRequest<{ Body: CREATE_VALENTINE_TYPE }>,
+            reply,
+          ) => {
+            const sessionCookie = req.cookies[SESSION_COOKIE_NAME];
 
             const sessionId = sessionCookie ? sessionCookie : generateString();
 
@@ -93,16 +116,23 @@ export class App {
             console.log(data);
 
             if (!sessionCookie) {
-              setCookie(reply, sessionId);
+              setSessionCookie(reply, sessionId);
             }
 
             return reply.status(201).send();
           },
-        );
+        });
 
-        instance.get(
-          '/valentines/:id',
-          async (req: FastifyRequest<{ Params: { id: string } }>, reply) => {
+        instance.route({
+          method: 'GET',
+          url: '/valentines/:id',
+          schema: {
+            params: GET_VALENTINE_PARAMS_SCHEMA,
+          },
+          handler: async (
+            req: FastifyRequest<{ Params: GET_VALENTINE_PARAMS_TYPE }>,
+            reply,
+          ) => {
             const { id } = req.params;
 
             const result = await this.db
@@ -120,12 +150,23 @@ export class App {
 
             return reply.status(200).send(valentine);
           },
-        );
+        });
 
-        instance.get('/valentines', async (req, reply) => {
-          const valentines = await this.db.select().from(schema.valentineTable);
+        instance.route({
+          method: 'GET',
+          url: '/valentines',
+          handler: async (req, reply) => {
+            const sessionId = req.cookies[SESSION_COOKIE_NAME];
 
-          return reply.status(200).send(valentines);
+            if (!sessionId) return [];
+
+            const valentines = await this.db
+              .select()
+              .from(schema.valentineTable)
+              .where(eq(schema.valentineTable.sessionId, sessionId));
+
+            return reply.status(200).send(valentines);
+          },
         });
 
         next();
