@@ -11,7 +11,7 @@ export const generateString = (): string => {
   return token;
 };
 
-export const setCookie = (reply: FastifyReply, sessionId: string) => {
+export const setSessionCookie = (reply: FastifyReply, sessionId: string) => {
   const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
 
   if (process.env.NODE_ENV === 'production') {
