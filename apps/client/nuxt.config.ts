@@ -10,7 +10,12 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
     '@vueuse/nuxt',
+    'nuxt-svgo',
   ],
+  svgo: {
+    autoImportPath: './assets/',
+    defaultImport: 'component',
+  },
   shadcn: {
     prefix: '',
     componentDir: './components/ui',
