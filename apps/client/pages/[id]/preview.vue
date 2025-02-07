@@ -10,7 +10,7 @@ const { data } = storeToRefs(store);
 
 <template>
   <div
-    class="inline-flex absolute w-3/6 top-6 bg-white p-2 rounded-md items-center justify-start gap-1"
+    class="inline-flex absolute w-3/6 top-2 bg-white p-2 rounded-md items-center justify-start gap-1 z-50"
   >
     <Button variant="ghost" size="icon" as-child>
       <NuxtLink :to="`/${id}/edit`">
