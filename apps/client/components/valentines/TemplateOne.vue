@@ -40,7 +40,7 @@ const stars = Array.from({ length: 15 }, () => {
         class="hidden lg:block absolute bottom-[5%] right-[-2px] h-[20%] z-20"
       />
       <div
-        class="size-full border-black border-2 bg-[#fecdeb] relative bg-[length:30px_30px] bg-[linear-gradient(to_right,#fee0f1_1px,transparent_1px),linear-gradient(to_bottom,#fee0f1_1px,transparent_1px)]"
+        class="overflow-hidden size-full border-black border-2 bg-[#fecdeb] relative bg-[length:30px_30px] bg-[linear-gradient(to_right,#fee0f1_1px,transparent_1px),linear-gradient(to_bottom,#fee0f1_1px,transparent_1px)]"
       >
         <Star
           v-for="(star, index) in stars"
@@ -56,7 +56,7 @@ const stars = Array.from({ length: 15 }, () => {
         />
         <p
           v-html="text.replaceAll('\n', '<br>')"
-          class="absolute left-[2%] md:top-[2%] text-wrap text-[#e9110b] font-excali lg:w-[60%] z-50 md:text-7xl text-4xl pointer-events-none"
+          class="absolute left-[2%] md:top-[2%] text-wrap text-[#e9110b] font-excali lg:w-[60%] z-50 md:text-7xl text-4xl pointer-events-none text-ellipsis overflow-hidden whitespace-nowrap"
         />
         <p
           class="absolute font-excali left-[6%] bottom-[2%] text-wrap text-black font-semibold z-50 text-3xl pointer-events-none"
