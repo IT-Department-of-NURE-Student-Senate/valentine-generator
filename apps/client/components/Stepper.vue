@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import TemplateOne from '~/components/valentines/TemplateOne.vue';
 import { STEPPER_TITLES } from '~/constants';
 
 const props = defineProps<{ id: string }>();
@@ -13,6 +14,7 @@ const { currentStep, isFirst } = storeToRefs(stepperStore);
 
 const getFieldState = (text: string, maxLength: number) => {
   const percentage = (text.length / maxLength) * 100;
+
   return {
     length: text.length,
     color:
@@ -54,9 +56,9 @@ const buttonFallback = computed(() =>
 <template>
   <Card class="md:w-[440px] w-full" v-if="currentStep >= 0 && currentStep <= 2">
     <CardHeader>
-      <CardTitle class="font-excali text-center">{{
-        STEPPER_TITLES[currentStep]
-      }}</CardTitle>
+      <CardTitle class="font-excali text-center">
+        {{ STEPPER_TITLES[currentStep] }}
+      </CardTitle>
     </CardHeader>
 
     <CardContent class="space-y-2" v-if="currentStep === 0">
@@ -133,29 +135,34 @@ const buttonFallback = computed(() =>
       >
     </CardFooter>
   </Card>
-  <div
-    v-else
-    class="flex flex-col size-full justify-center items-center gap-5 max-md:p-4"
-  >
+  <div v-else class="flex flex-col size-full justify-center items-center gap-5">
     <div
-      class="flex w-full md:w-3/6 border rounded-md p-4 justify-between items-center max-md:flex-col"
+      class="inline-flex absolute md:w-3/6 max-md:bg-transparent max-md:w-full md:top-3 max-md:bottom-2 bg-white p-2 rounded-md items-center justify-between gap-1 z-50"
     >
-      <p class="font-excali text-xl">Обери шаблон</p>
-      <div class="inline-flex gap-3 max-sm:flex-col">
-        <Button variant="ghost" @click="stepperStore.previousStep()"
-          >Назад</Button
-        >
-        <Button variant="outline">
-          <NuxtLink :to="`/${id}/preview`">Переглянути</NuxtLink>
-        </Button>
-        <Button
-          @click="handleSubmit()"
-          @touchend.prevent="handleSubmit"
-          :disabled="isPending"
-          >{{ buttonFallback }}</Button
-        >
-      </div>
+      <Button
+        class="max-md:bg-white"
+        variant="ghost"
+        size="icon"
+        @click="stepperStore.previousStep()"
+      >
+        <Icon name="lucide:chevron-left" class="size-5" />
+      </Button>
+      <Button @click="handleSubmit">
+        {{ buttonFallback }}
+      </Button>
     </div>
-    <TemplateSelect />
+    <TemplateOne
+      v-if="data.template === 'template-1'"
+      :text="data.text"
+      :to="data.to"
+      :from="data.from"
+    />
   </div>
+  <NuxtLink
+    v-show="currentStep <= 2"
+    class="text-primary hover:underline focus:underline"
+    to="/"
+  >
+    Повернутися на головну
+  </NuxtLink>
 </template>

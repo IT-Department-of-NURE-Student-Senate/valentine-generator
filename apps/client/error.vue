@@ -14,7 +14,7 @@ const handleError = () => {
   <NuxtLayout>
     <div
       v-if="error?.statusCode === 404"
-      class="flex flex-col w-full items-center gap-3 mb-28"
+      class="flex flex-col w-full items-center md:gap-10 gap-4 md:mb-28 max-md:p-2"
     >
       <em
         class="font-excali text-5xl text-center leading-relaxed bg-primary/30 selection:bg-transparent p-2 rounded-md"
@@ -31,7 +31,10 @@ const handleError = () => {
       </p>
       <Button variant="outline" @click="handleError"> На головну </Button>
     </div>
-    <div v-else class="flex flex-col w-full items-center gap-3 mb-28">
+    <div
+      v-else
+      class="flex flex-col w-full items-center md:gap-10 gap-4 md:mb-28 max-md:p-2"
+    >
       <em
         class="font-excali text-5xl text-center leading-relaxed bg-primary/30 selection:bg-transparent p-2 rounded-md"
       >
@@ -42,11 +45,6 @@ const handleError = () => {
       </p>
       <Button variant="outline" @click="handleError"> На головну </Button>
     </div>
-    <div class="flex flex-col items-center absolute bottom-20">
-      <Icon name="vi:horny" class="size-64" />
-      <p class="text-xl font-excali">
-        З любовʼю від IT-відділу Студентського сенату ХНУРЕ!
-      </p>
-    </div>
+    <HornyIcon />
   </NuxtLayout>
 </template>
