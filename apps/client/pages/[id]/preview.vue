@@ -10,14 +10,16 @@ const { data } = storeToRefs(store);
 
 <template>
   <div
-    class="inline-flex absolute w-3/6 top-2 bg-white p-2 rounded-md items-center justify-start gap-1 z-50"
+    class="inline-flex absolute md:w-3/6 w-max max-md:right-2 top-2 bg-white p-2 rounded-md items-center justify-start gap-1 z-50"
   >
     <Button variant="ghost" size="icon" as-child>
       <NuxtLink :to="`/${id}/edit`">
         <Icon name="lucide:chevron-left" class="size-5" />
       </NuxtLink>
     </Button>
-    <p class="font-excali text-lg">Режим попереднього перегляду</p>
+    <p class="font-excali text-lg max-md:hidden">
+      Режим попереднього перегляду
+    </p>
   </div>
   <TemplateOne
     v-if="data.template === 'template-1'"
