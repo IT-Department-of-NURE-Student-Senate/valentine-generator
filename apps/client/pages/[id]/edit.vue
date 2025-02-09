@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 const valentineId = String(useRoute().params.id);
-
-console.log(valentineId);
 </script>
 
 <template>

@@ -1,7 +1,14 @@
 <script lang="ts" setup>
-const id = useRoute().params.id;
+const id = useRouteParams('id');
 
-const { data } = await useValentine(String(id));
+const { data } = await useValentine(String(id.value));
+
+if (!data.value) {
+  throw createError({
+    status: 404,
+    message: 'Валентинка не знайдена',
+  });
+}
 
 const shareIcon = ref('lucide:copy');
 

@@ -4,17 +4,14 @@ export const useValentine = (id: string) => {
   return useAsyncData(`valentine-${id}`, async () => {
     const { apiBaseUrl } = useRuntimeConfig().public;
 
-    try {
-      const response = await $fetch<Valentine>(
-        `${apiBaseUrl}/valentines/${id}`,
-      );
+    const response = await fetch(`${apiBaseUrl}/valentines/${id}`);
 
-      return response;
-    } catch {
-      throw createError({
-        status: 404,
-        message: 'Валентинка не знайдена',
-      });
+    if (!response.ok) {
+      return null;
     }
+
+    const valentine = await response.json();
+
+    return valentine as Valentine;
   });
 };
