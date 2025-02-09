@@ -11,6 +11,25 @@ const stepperStore = useStepperStore();
 
 const { currentStep, isFirst } = storeToRefs(stepperStore);
 
+const getFieldState = (text: string, maxLength: number) => {
+  const percentage = (text.length / maxLength) * 100;
+  return {
+    length: text.length,
+    color:
+      percentage < 70
+        ? 'text-muted-foreground'
+        : percentage < 90
+          ? 'text-yellow-500'
+          : 'text-red-500',
+  };
+};
+
+const fieldState = computed(() => ({
+  text: getFieldState(data.value.text, 50),
+  to: getFieldState(data.value.to, 25),
+  from: getFieldState(data.value.from, 25),
+}));
+
 const conditions = computed(() => {
   return [data.value.text, data.value.to, data.value.from].map(
     (item) => !item.trim().length,
@@ -33,7 +52,7 @@ const buttonFallback = computed(() =>
 </script>
 
 <template>
-  <Card class="w-[440px]" v-if="currentStep >= 0 && currentStep <= 2">
+  <Card class="md:w-[440px] w-full" v-if="currentStep >= 0 && currentStep <= 2">
     <CardHeader>
       <CardTitle class="font-excali text-center">{{
         STEPPER_TITLES[currentStep]
@@ -48,7 +67,17 @@ const buttonFallback = computed(() =>
         maxlength="50"
         autofocus
       />
-      <p class="text-sm text-muted-foreground">Максимум 50 символів</p>
+      <div class="flex w-full justify-between">
+        <p class="text-sm text-muted-foreground">Максимум 50 символів</p>
+        <p
+          class="text-sm transition-all duration-200"
+          :class="fieldState.text.color"
+        >
+          <span class="inline-block transition-transform duration-200">
+            {{ fieldState.text.length }}/50
+          </span>
+        </p>
+      </div>
     </CardContent>
 
     <CardContent class="space-y-2" v-if="currentStep === 1">
@@ -58,7 +87,17 @@ const buttonFallback = computed(() =>
         placeholder="Введи імʼя..."
         maxlength="25"
       />
-      <p class="text-sm text-muted-foreground">Максимум 25 символів</p>
+      <div class="flex w-full justify-between">
+        <p class="text-sm text-muted-foreground">Максимум 25 символів</p>
+        <p
+          class="text-sm transition-all duration-200"
+          :class="fieldState.to.color"
+        >
+          <span class="inline-block transition-transform duration-200">
+            {{ fieldState.to.length }}/25
+          </span>
+        </p>
+      </div>
     </CardContent>
 
     <CardContent v-if="currentStep === 2">
@@ -68,7 +107,17 @@ const buttonFallback = computed(() =>
         placeholder="Введи імʼя..."
         maxlength="25"
       />
-      <p class="text-sm text-muted-foreground">Максимум 25 символів</p>
+      <div class="flex w-full justify-between">
+        <p class="text-sm text-muted-foreground">Максимум 25 символів</p>
+        <p
+          class="text-sm transition-all duration-200"
+          :class="fieldState.from.color"
+        >
+          <span class="inline-block transition-transform duration-200">
+            {{ fieldState.from.length }}/25
+          </span>
+        </p>
+      </div>
     </CardContent>
     <CardFooter class="inline-flex w-full justify-between items-center gap-3">
       <Button
@@ -84,19 +133,27 @@ const buttonFallback = computed(() =>
       >
     </CardFooter>
   </Card>
-  <div v-else class="flex flex-col size-full justify-center items-center gap-5">
-    <div class="flex w-3/6 border rounded-md p-4 justify-between items-center">
+  <div
+    v-else
+    class="flex flex-col size-full justify-center items-center gap-5 max-md:p-4"
+  >
+    <div
+      class="flex w-full md:w-3/6 border rounded-md p-4 justify-between items-center max-md:flex-col"
+    >
       <p class="font-excali text-xl">Обери шаблон</p>
-      <div class="inline-flex gap-3">
+      <div class="inline-flex gap-3 max-sm:flex-col">
         <Button variant="ghost" @click="stepperStore.previousStep()"
           >Назад</Button
         >
         <Button variant="outline">
           <NuxtLink :to="`/${id}/preview`">Переглянути</NuxtLink>
         </Button>
-        <Button @click="handleSubmit()" :disabled="isPending">{{
-          buttonFallback
-        }}</Button>
+        <Button
+          @click="handleSubmit()"
+          @touchend.prevent="handleSubmit"
+          :disabled="isPending"
+          >{{ buttonFallback }}</Button
+        >
       </div>
     </div>
     <TemplateSelect />

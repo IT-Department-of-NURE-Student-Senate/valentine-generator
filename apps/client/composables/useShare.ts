@@ -30,9 +30,7 @@ export const useShare = (valentine: Valentine) => {
     },
   ];
 
-  const copy = () => {
-    navigator.clipboard.writeText(link);
-  };
+  const { copy, copied } = useClipboard({ legacy: true });
 
-  return { link, socialLinks, copy };
+  return { link, socialLinks, copy, copied };
 };

@@ -14,12 +14,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full items-center gap-10 mb-28">
+  <div
+    class="flex flex-col w-full items-center md:gap-10 gap-4 md:mb-28 max-md:p-2"
+  >
     <p class="font-inter text-2xl text-center leading-relaxed">
       Створіть незабутні відчуття для своєї другої половинки <br />
       Відправте
       <em
-        class="font-excali bg-primary/30 selection:bg-transparent p-2 rounded-md"
+        class="font-excali whitespace-nowrap bg-primary/30 selection:bg-transparent p-2 rounded-md"
         >віртуальну валентинку</em
       >
       будь-кому!
@@ -29,10 +31,5 @@ onMounted(() => {
       Створити
     </Button>
   </div>
-  <div class="flex flex-col items-center absolute bottom-20">
-    <Icon name="vi:horny" class="size-64" />
-    <p class="text-xl font-excali">
-      З любовʼю від IT-відділу Студентського сенату ХНУРЕ!
-    </p>
-  </div>
+  <HornyIcon />
 </template>

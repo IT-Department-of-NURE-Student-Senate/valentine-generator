@@ -17,7 +17,7 @@ if (!cookie.value || cookie.value !== id.value) {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 size-full items-center justify-center">
+  <div class="flex flex-col gap-4 size-full items-center justify-center overflow-hidden p-2">
     <Stepper :id="id as string" />
   </div>
 </template>

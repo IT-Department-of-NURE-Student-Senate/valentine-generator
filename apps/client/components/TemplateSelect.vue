@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+import { RadioGroupItem, RadioGroupRoot } from 'radix-vue';
 import { ScrollArea, ScrollBar } from './ui/scroll-area';
-import { RadioGroupRoot, RadioGroupItem } from 'radix-vue';
 
 const store = useValentineStore();
 
@@ -21,10 +21,11 @@ const selectedTemplate = computed(() => {
 
 <template>
   <NuxtImg
-    class="flex flex-col w-3/6 h-3/6 border rounded-md"
+    class="flex flex-col md:w-3/6 md:h-3/6 border rounded-md"
     :src="selectedTemplate"
     fit="contain"
   />
+
   <ScrollArea class="border border-muted rounded-xl w-2/5 bg-white">
     <RadioGroupRoot v-model="data.template" class="flex p-4 space-x-4 w-max">
       <RadioGroupItem
