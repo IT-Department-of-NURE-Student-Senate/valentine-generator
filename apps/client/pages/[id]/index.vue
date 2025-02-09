@@ -1,15 +1,14 @@
 <script lang="ts" setup>
+import { NuxtErrorBoundary } from '#components';
 import TemplateOne from '~/components/valentines/TemplateOne.vue';
+import { VALENTINE_NOT_FOUND_ERR } from '~/constants';
 
 const id = useRoute().params.id;
 
 const { data } = await useValentine(String(id));
 
 if (!data.value) {
-  throw createError({
-    status: 404,
-    message: 'Валентинка не знайдена',
-  });
+  throw showError(VALENTINE_NOT_FOUND_ERR);
 }
 </script>
 

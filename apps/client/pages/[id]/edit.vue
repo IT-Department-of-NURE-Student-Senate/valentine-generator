@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const valentineId = String(useRoute().params.id);
+const valentineId = ref(String(useRouteParams('id')));
 </script>
 
 <template>

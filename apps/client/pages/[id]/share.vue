@@ -1,13 +1,12 @@
 <script lang="ts" setup>
+import { VALENTINE_NOT_FOUND_ERR } from '~/constants';
+
 const id = useRouteParams('id');
 
 const { data } = await useValentine(String(id.value));
 
 if (!data.value) {
-  throw createError({
-    status: 404,
-    message: 'Валентинка не знайдена',
-  });
+  throw showError(VALENTINE_NOT_FOUND_ERR);
 }
 
 const shareIcon = ref('lucide:copy');
