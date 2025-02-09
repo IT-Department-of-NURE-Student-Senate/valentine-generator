@@ -56,10 +56,10 @@ const stars = Array.from({ length: 15 }, () => {
         />
         <p
           v-html="text.replaceAll('\n', '<br>')"
-          class="absolute left-[2%] md:top-[2%] text-wrap text-[#e9110b] font-excali lg:w-[60%] z-50 md:text-7xl text-4xl pointer-events-none text-ellipsis overflow-hidden whitespace-nowrap"
+          class="absolute left-[2%] md:top-[2%] text-wrap text-[#e9110b] font-excali lg:w-[60%] z-[45] md:text-7xl text-4xl pointer-events-none text-ellipsis overflow-hidden whitespace-nowrap"
         />
         <p
-          class="absolute font-excali left-[6%] bottom-[2%] text-wrap text-black font-semibold z-50 text-3xl pointer-events-none"
+          class="absolute font-excali left-[6%] bottom-[2%] text-wrap text-black font-semibold z-[45] text-3xl pointer-events-none"
         >
           Від щирого серця<br />
           для {{ to }}<br />
@@ -74,10 +74,10 @@ const stars = Array.from({ length: 15 }, () => {
           class="absolute md:bottom-[20%] md:right-[2%] lg:h-3/4 md:h-[30%] max-lg:left-1/2 max-lg:-translate-x-1/2 max-md:bottom-[30%] max-md:w-full z-20"
         />
         <Cloud1
-          class="absolute lg:bottom-[23%] lg:right-[43%] lg:h-[25%] h-[15%] right-0 z-10 bottom-0"
+          class="absolute lg:bottom-[23%] lg:right-[43%] lg:h-[25%] h-[15%] right-0 z-10 bottom-[-2px]"
         />
         <Cloud5
-          class="hidden lg:block absolute top-[1%] right-[5%] h-[35%] z-10"
+          class="absolute lg:top-[1%] md:right-[5%] max-md:left-[3%] lg:h-[35%] h-[16%] top-[-2px] z-10 max-lg:rotate-180"
         />
       </div>
     </div>

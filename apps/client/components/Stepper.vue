@@ -52,7 +52,7 @@ const buttonFallback = computed(() =>
 </script>
 
 <template>
-  <Card class="w-[440px]" v-if="currentStep >= 0 && currentStep <= 2">
+  <Card class="md:w-[440px] w-full" v-if="currentStep >= 0 && currentStep <= 2">
     <CardHeader>
       <CardTitle class="font-excali text-center">{{
         STEPPER_TITLES[currentStep]
