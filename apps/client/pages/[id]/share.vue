@@ -1,7 +1,13 @@
 <script lang="ts" setup>
-const id = useRoute().params.id;
+import { VALENTINE_NOT_FOUND_ERR } from '~/constants';
 
-const { data } = await useValentine(String(id));
+const id = useRouteParams('id');
+
+const { data } = await useValentine(String(id.value));
+
+if (!data.value) {
+  throw showError(VALENTINE_NOT_FOUND_ERR);
+}
 
 const shareIcon = ref('lucide:copy');
 

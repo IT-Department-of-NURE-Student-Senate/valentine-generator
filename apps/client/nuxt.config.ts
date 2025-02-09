@@ -12,6 +12,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-svgo',
   ],
+  future: {
+    compatibilityVersion: 4,
+  },
   svgo: {
     autoImportPath: './assets/',
     defaultImport: 'component',

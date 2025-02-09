@@ -1,15 +1,7 @@
 <script lang="ts" setup>
-import { nanoid } from 'nanoid';
-
 const valentineId = useCookie('valentine-card-id');
 
-const handleRedirect = () => {
-  const id = nanoid(12);
-
-  valentineId.value = id;
-
-  return navigateTo(`/${id}/edit`);
-};
+const { handleRedirect } = useValentineRedirect();
 
 const valentineStore = useValentineStore();
 const stepperStore = useStepperStore();
@@ -17,6 +9,7 @@ const stepperStore = useStepperStore();
 onMounted(() => {
   valentineStore.reset();
   stepperStore.reset();
+  valentineId.value = '';
 });
 </script>
 

@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import TemplateOne from '~/components/valentines/TemplateOne.vue';
+import { VALENTINE_COOKIE_KEY } from '~/constants';
 
-const id = useCookie('valentine-card-id');
+const id = useCookie(VALENTINE_COOKIE_KEY);
 
 const store = useValentineStore();
 
