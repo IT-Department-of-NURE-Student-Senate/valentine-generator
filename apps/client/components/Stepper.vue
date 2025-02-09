@@ -148,9 +148,12 @@ const buttonFallback = computed(() =>
         <Button variant="outline">
           <NuxtLink :to="`/${id}/preview`">Переглянути</NuxtLink>
         </Button>
-        <Button @click="handleSubmit()" :disabled="isPending">{{
-          buttonFallback
-        }}</Button>
+        <Button
+          @click="handleSubmit()"
+          @touchend.prevent="handleSubmit"
+          :disabled="isPending"
+          >{{ buttonFallback }}</Button
+        >
       </div>
     </div>
     <TemplateSelect />

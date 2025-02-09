@@ -7,26 +7,30 @@ const shareIcon = ref('lucide:copy');
 
 const { link, copy, socialLinks } = useShare(data.value!);
 
-const handleCopy = () => {
-  copy();
-
-  shareIcon.value = 'lucide:check';
-
-  setTimeout(() => {
-    shareIcon.value = 'lucide:copy';
-  }, 274);
+const handleCopy = async () => {
+  try {
+    await copy(link);
+    shareIcon.value = 'lucide:check';
+    setTimeout(() => {
+      shareIcon.value = 'lucide:copy';
+    }, 274);
+  } catch (error) {
+    console.error('Failed to copy:', error);
+  }
 };
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 mb-28">
+  <div
+    class="flex flex-col w-full items-center md:gap-10 gap-4 md:mb-28 max-md:p-2"
+  >
     <p class="font-excali text-2xl text-center">
       Вашу валентинку опубліковано!
     </p>
     <p class="text-center">
       Ви можете поділитися нею за посиланням, доступним внизу
     </p>
-    <div class="relative w-full items-center">
+    <div class="relative w-full items-center sm:w-[400px]">
       <Input v-model="link" type="text" readonly class="pr-10" />
       <span
         class="absolute end-0 inset-y-0 flex items-center justify-center px-1"
@@ -54,10 +58,5 @@ const handleCopy = () => {
       </Button>
     </div>
   </div>
-  <div class="flex flex-col items-center absolute bottom-20">
-    <Icon name="vi:horny" class="size-64" />
-    <p class="text-xl font-excali">
-      З любовʼю від IT-відділу Студентського сенату ХНУРЕ!
-    </p>
-  </div>
+  <HornyIcon />
 </template>

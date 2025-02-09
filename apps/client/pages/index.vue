@@ -38,10 +38,5 @@ onMounted(() => {
       Створити
     </Button>
   </div>
-  <div class="flex flex-col items-center md:absolute md:bottom-20">
-    <Icon name="vi:horny" class="md:size-64 size-48" />
-    <p class="text-xl font-excali text-center">
-      З любовʼю від IT-відділу Студентського сенату ХНУРЕ!
-    </p>
-  </div>
+  <HornyIcon />
 </template>
