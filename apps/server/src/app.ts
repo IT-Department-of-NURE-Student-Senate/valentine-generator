@@ -171,7 +171,7 @@ export class App {
 
         next();
       },
-      { prefix: 'api' },
+      { prefix: 'backend' },
     );
   }
 
