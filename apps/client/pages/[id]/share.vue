@@ -24,6 +24,18 @@ const handleCopy = async () => {
     console.error('Failed to copy:', error);
   }
 };
+
+useSeoMeta({
+  title: 'Поділіться валентинкою',
+  ogTitle: '%s',
+  ogType: 'website',
+});
+
+defineOgImageComponent('NuxtSeo', {
+  title: 'Поділіться валентинкою',
+  theme: '#e9110b',
+  colorMode: 'light',
+});
 </script>
 
 <template>
@@ -34,7 +46,7 @@ const handleCopy = async () => {
       Вашу валентинку опубліковано!
     </p>
     <p class="text-center">
-      Ви можете поділитися нею за посиланням, доступним внизу
+      Ви можете поділитися нею за посиланням, доступним знизу
     </p>
     <div class="relative w-full items-center sm:w-[400px]">
       <Input v-model="link" type="text" readonly class="pr-10" />

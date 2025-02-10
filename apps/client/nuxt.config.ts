@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   modules: [
     'shadcn-nuxt',
     '@nuxtjs/color-mode',
@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'pinia-plugin-persistedstate/nuxt',
     '@vueuse/nuxt',
     'nuxt-svgo',
+    '@nuxtjs/seo',
   ],
   future: {
     compatibilityVersion: 4,
@@ -42,5 +43,22 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL,
       websiteBaseUrl: process.env.WEBSITE_BASE_URL,
     },
+  },
+  app: {
+    head: {
+      // @ts-expect-error no type coverage expected
+      titleTemplate: '%s %separator %siteName',
+      templateParams: {
+        separator: '❤️',
+        siteName: 'NURE Valentines',
+      },
+    },
+  },
+  site: {
+    url: 'https://valentines.mindenit.org',
+    name: 'NURE Valentines',
+    description: 'Додаток для створення та поширення валентинок',
+    defaultLocale: 'uk',
+    indexable: true,
   },
 });
