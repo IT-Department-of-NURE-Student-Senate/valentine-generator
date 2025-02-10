@@ -18,6 +18,10 @@ RUN pnpm build
 
 FROM base
 
+ENV NODE_ENV=production
+ENV API_BASE_URL=${API_BASE_URL}
+ENV WEBSITE_BASE_URL=${WEBSITE_BASE_URL}
+
 COPY --from=build /app/client/.output /app/client/.output
 
 EXPOSE 3000
