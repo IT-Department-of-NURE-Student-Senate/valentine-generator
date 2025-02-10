@@ -59,7 +59,7 @@ export class App {
     this.app.setSerializerCompiler(serializerCompiler);
 
     this.app.register(fastifyCors, {
-      origin: ['http://localhost:3000', 'https://love.mindenit.org'],
+      origin: [env.WEBSITE_BASE_URL],
       credentials: true,
       methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
     });

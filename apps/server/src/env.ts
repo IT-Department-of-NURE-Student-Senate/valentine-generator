@@ -7,6 +7,7 @@ const envSchema = z.object({
   POSTGRES_PASSWORD: z.string(),
   POSTGRES_PORT: z.coerce.number().default(5432),
   COOKIE_SECRET: z.string(),
+  WEBSITE_BASE_URL: z.string().nonempty(),
 });
 
 const env = envSchema.parse(process.env);

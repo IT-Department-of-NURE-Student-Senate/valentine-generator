@@ -39,8 +39,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL,
-      websiteBaseUrl: process.env.WEBSITE_BASE_URL,
+      apiBaseUrl: 'https://love.mindenit.org/backend',
+      websiteBaseUrl: 'https://love.mindenit.org',
     },
   },
 });

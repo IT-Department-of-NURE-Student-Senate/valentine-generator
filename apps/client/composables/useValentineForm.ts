@@ -10,7 +10,9 @@ export const useValentineForm = () => {
     try {
       isPending.value = true;
 
-      await $fetch(`${apiBaseUrl}/valentines`, {
+      const url = `${apiBaseUrl}/valentines`;
+
+      await $fetch(url, {
         method: 'POST',
         body: data,
         credentials: 'include',
