@@ -32,67 +32,60 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="flex flex-col w-full h-dvh items-center justify-center md:gap-10 gap-4 max-md:p-2"
-    :style="{
-      background:
-        'radial-gradient(94.39% 76.37% at 50% 134.15%, #E11C47 0%, #FFF 100%)',
-    }"
-  >
-    <p class="font-inter text-2xl text-center leading-relaxed">
-      Створіть незабутні відчуття для своєї другої половинки <br />
-      Відправте
-      <em
-        class="font-excali whitespace-nowrap bg-primary/30 selection:bg-transparent p-2 rounded-md"
+  <div class="flex flex-col w-full mx-auto min-h-dvh">
+    <div
+      class="w-full"
+      :style="{
+        background:
+          'radial-gradient(94.39% 76.37% at 50% 134.15%, #E11C47 0%, #FFF 100%)',
+      }"
+    >
+      <div class="flex flex-col w-full h-dvh items-center justify-center gap-6">
+        <p class="font-inter text-2xl text-center leading-relaxed">
+          Створіть незабутні відчуття для своєї другої половинки <br />
+          Відправте
+          <em
+            class="font-excali inline-block whitespace-nowrap bg-primary/30 selection:bg-transparent p-2 rounded-md"
+          >
+            віртуальну валентинку
+          </em>
+        </p>
+
+        <div class="flex max-md:flex-col gap-3">
+          <Button class="h-12 text-base" @click="handleRedirect()">
+            <Icon class="size-6" name="lucide:plus" />
+            Створити
+          </Button>
+          <Button class="h-12 text-base" variant="outline">
+            <NuxtLink to="#how-it-works"> Як це працює? </NuxtLink>
+          </Button>
+        </div>
+
+        <HornyIcon />
+      </div>
+    </div>
+
+    <div
+      class="w-full"
+      :style="{
+        background:
+          'radial-gradient(94.39% 76.37% at 50% -34.15%, #E11C47 0%, #FFF 100%)',
+      }"
+    >
+      <div
+        class="flex flex-col mx-auto md:w-2/4 w-full h-max items-center gap-6 pb-14"
       >
-        віртуальну валентинку
-      </em>
-    </p>
-    <div class="inline-flex gap-3 flex-wrap">
-      <Button class="h-12 text-base" @click="handleRedirect()">
-        <Icon class="size-6" name="lucide:plus" />
-        Створити
-      </Button>
-      <Button class="h-12 text-base" variant="outline">
-        <NuxtLink to="#how-it-works"> Як це працює? </NuxtLink>
-      </Button>
-    </div>
-  </div>
-  <div
-    class="flex flex-col w-full h-dvh items-center justify-center"
-    :style="{
-      background:
-        'radial-gradient(94.39% 76.37% at 50% -34.15%, #E11C47 0%, #FFF 100%)',
-    }"
-  >
-    <h2 id="how-it-works" class="text-3xl font-excali mb-5">Як це працює?</h2>
-    <div class="grid grid-cols-2 w-2/4 gap-x-5">
-      <div class="p-4">
-        <p class="text-xl font-excali">Крок 1:</p>
-        <p>Настисніть на кнопку "Створити"</p>
-      </div>
-      <div class="flex w-full justify-end p-4">
-        <NuxtImg src="/1.png" />
-      </div>
-      <div class="flex w-full justify-start p-4">
-        <NuxtImg src="/2.png" />
-      </div>
-      <div class="flex flex-col w-full justify-center p-4">
-        <p class="text-xl font-excali text-end">Крок 2:</p>
-        <p class="text-end">Заповність форму та натисність "Опублікувати"</p>
-      </div>
-      <div class="flex flex-col w-full justify-center p-4">
-        <p class="text-xl font-excali">Крок 3:</p>
-        <p>Скопіюйте посилання та поділіться ним</p>
-      </div>
-      <div class="flex w-full items-center justify-end p-4">
-        <NuxtImg src="/3.png" />
+        <h2 id="how-it-works" class="text-3xl font-excali">Як це працює?</h2>
+
+        <GuideSteps />
+
+        <div class="flex items-center justify-center w-full">
+          <Button class="h-12 text-base" @click="handleRedirect()">
+            <Icon class="size-6" name="lucide:plus" />
+            Створити
+          </Button>
+        </div>
       </div>
     </div>
-    <Button class="h-12 text-base mt-5" @click="handleRedirect()">
-      <Icon class="size-6" name="lucide:plus" />
-      Створити
-    </Button>
   </div>
-  <HornyIcon />
 </template>
