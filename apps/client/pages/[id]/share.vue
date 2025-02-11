@@ -40,7 +40,7 @@ defineOgImageComponent('NuxtSeo', {
 
 <template>
   <div
-    class="flex flex-col w-full items-center md:gap-10 gap-4 md:mb-28 max-md:p-2"
+    class="flex flex-col items-center justify-center relative h-dvh container mx-auto gap-4"
   >
     <p class="font-excali text-2xl text-center">
       Вашу валентинку опубліковано!
@@ -75,6 +75,9 @@ defineOgImageComponent('NuxtSeo', {
         </NuxtLink>
       </Button>
     </div>
+    <NuxtLink as-child to="/">
+      <Button class="mt-4">На головну</Button>
+    </NuxtLink>
   </div>
   <HornyIcon />
 </template>
