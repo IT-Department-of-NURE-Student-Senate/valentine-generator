@@ -85,11 +85,11 @@ useIntersectionObserver(cardRef, ([{ isIntersecting }]) => {
 
           <p
             v-html="text.replaceAll('\n', '<br>')"
-            class="absolute left-[2%] md:top-[2%] text-wrap text-[#e9110b] font-excali lg:w-[60%] z-[45] md:text-7xl text-4xl pointer-events-none"
+            class="absolute left-[2%] md:top-[2%] text-wrap text-[#e9110b] font-excali lg:w-[60%] z-[45] md:text-7xl text-4xl pointer-events-none select-none"
           />
 
           <p
-            class="absolute font-excali left-[6%] bottom-[2%] text-wrap text-black font-semibold z-[45] text-3xl pointer-events-none"
+            class="absolute font-excali left-[6%] bottom-[2%] text-wrap text-black font-semibold z-[45] text-3xl pointer-events-none select-none"
           >
             Від щирого серця<br />
             для {{ to }}<br />
