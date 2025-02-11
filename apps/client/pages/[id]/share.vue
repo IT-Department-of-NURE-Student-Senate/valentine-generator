@@ -75,9 +75,9 @@ defineOgImageComponent('NuxtSeo', {
         </NuxtLink>
       </Button>
     </div>
-    <NuxtLink as-child to="/">
-      <Button class="mt-4">На головну</Button>
-    </NuxtLink>
+    <Button class="mt-4" as-child>
+      <NuxtLink to="/" as-child>На головну</NuxtLink>
+    </Button>
+    <HornyIcon />
   </div>
-  <HornyIcon />
 </template>
