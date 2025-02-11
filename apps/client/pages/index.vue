@@ -40,7 +40,9 @@ onMounted(() => {
           'radial-gradient(94.39% 76.37% at 50% 134.15%, #E11C47 0%, #FFF 100%)',
       }"
     >
-      <div class="flex flex-col w-full h-dvh items-center justify-center gap-6">
+      <div
+        class="flex flex-col w-full h-dvh items-center justify-center gap-6 container"
+      >
         <p class="font-inter text-2xl text-center leading-relaxed">
           Створіть незабутні відчуття для своєї другої половинки <br />
           Відправте
@@ -51,7 +53,7 @@ onMounted(() => {
           </em>
         </p>
 
-        <div class="flex max-md:flex-col gap-3">
+        <div class="flex gap-3">
           <Button class="h-12 text-base" @click="handleRedirect()">
             <Icon class="size-6" name="lucide:plus" />
             Створити
@@ -73,7 +75,7 @@ onMounted(() => {
       }"
     >
       <div
-        class="flex flex-col mx-auto md:w-2/4 w-full h-max items-center gap-6 pb-14"
+        class="flex flex-col mx-auto md:w-2/4 w-full h-max items-center gap-6 pb-14 container"
       >
         <h2 id="how-it-works" class="text-3xl font-excali">Як це працює?</h2>
 
