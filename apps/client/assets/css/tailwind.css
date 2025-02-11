@@ -84,6 +84,6 @@
     @apply bg-background text-foreground;
   }
   #__nuxt {
-    @apply flex flex-col w-full h-dvh;
+    @apply flex flex-col w-full h-auto;
   }
 }

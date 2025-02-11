@@ -102,7 +102,7 @@ const buttonFallback = computed(() =>
       </div>
     </CardContent>
 
-    <CardContent v-if="currentStep === 2">
+    <CardContent class="space-y-2" v-if="currentStep === 2">
       <Input
         v-model="data.from"
         type="text"
