@@ -100,6 +100,9 @@ const buttonFallback = computed(() =>
           </span>
         </p>
       </div>
+      <span class="inline-block text-sm text-muted-foreground pt-4"
+        >Як це буде виглядати: {{ generateText('...', data.to) }}</span
+      >
     </CardContent>
 
     <CardContent class="space-y-2" v-if="currentStep === 2">
@@ -120,6 +123,9 @@ const buttonFallback = computed(() =>
           </span>
         </p>
       </div>
+      <span class="inline-block text-sm text-muted-foreground pt-4"
+        >Як це буде виглядати: {{ generateText(data.from, data.to) }}</span
+      >
     </CardContent>
     <CardFooter class="inline-flex w-full justify-between items-center gap-3">
       <Button

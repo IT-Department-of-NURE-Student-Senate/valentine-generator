@@ -55,7 +55,7 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: 'https://valentines.mindenit.org',
+    url: 'https://love.mindenit.org',
     name: 'NURE Valentines',
     description: 'Додаток для створення та поширення валентинок',
     defaultLocale: 'uk',
