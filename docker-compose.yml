@@ -3,9 +3,6 @@ networks:
   dev:
     driver: bridge
 
-volumes:
-  pgdata:
-
 services:
   db:
     image: 'postgres:latest'
@@ -87,3 +84,6 @@ services:
       options:
         max-size: '10m'
         max-file: '3'
+        
+volumes:
+  pgdata:
