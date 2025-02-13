@@ -21,6 +21,7 @@ defineOgImageComponent('NuxtSeo', {
 });
 
 const { handleRedirect } = useValentineRedirect();
+const { count, error, isPending } = useValentinesCount();
 
 const valentineStore = useValentineStore();
 const stepperStore = useStepperStore();
@@ -61,6 +62,23 @@ onMounted(() => {
           <Button class="h-12 text-base" variant="outline">
             <NuxtLink to="#how-it-works"> Як це працює? </NuxtLink>
           </Button>
+        </div>
+
+        <div
+          class="flex items-center justify-between border-2 border-dashed border-pink-300 rounded-xl p-8 bg-pink-50/30 backdrop-blur-sm shadow-inner max-md:flex-col max-md:text-center"
+        >
+          <p
+            v-if="isPending"
+            class="font-excali text-xl text-red-500 animate-pulse"
+          >
+            Рахуємо валентинки... 💌
+          </p>
+          <p v-else-if="error" class="font-excali text-xl text-red-500">
+            Сталася помилка при отриманні даних 😢
+          </p>
+          <p v-else class="font-excali text-xl text-red-500">
+            {{ count }} валентинок знайшли своїх адресатів ✨
+          </p>
         </div>
 
         <HornyIcon />
