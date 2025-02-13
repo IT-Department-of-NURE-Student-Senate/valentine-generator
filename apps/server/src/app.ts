@@ -1,7 +1,7 @@
 import fastifyCookie from '@fastify/cookie';
 import { fastifyCors } from '@fastify/cors';
 import fastifyRateLimit from '@fastify/rate-limit';
-import { eq } from 'drizzle-orm';
+import { count, eq } from 'drizzle-orm';
 import { drizzle, type PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import type { FastifyRequest } from 'fastify';
 import fastify from 'fastify';
@@ -91,6 +91,22 @@ export class App {
             };
 
             return reply.status(200).send(data);
+          },
+        });
+
+        instance.route({
+          method: 'GET',
+          url: '/statistics',
+          handler: async (_, reply) => {
+            const result = await this.db
+              .select({
+                total: count(),
+              })
+              .from(schema.valentineTable);
+
+            return reply.status(200).send({
+              totalValentines: result[0]?.total ?? 0,
+            });
           },
         });
 

@@ -17,4 +17,8 @@ interface SocialLink {
   link: string;
 }
 
-export type { SocialLink, StepperData, Valentine };
+interface Statistics {
+  totalValentines: number;
+}
+
+export type { SocialLink, Statistics, StepperData, Valentine };
