@@ -73,12 +73,6 @@ services:
       options:
         max-size: '20m'
         max-file: '5'
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/api/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 40s
     deploy:
       resources:
         limits:
@@ -94,8 +88,7 @@ services:
     ports:
       - '${FRONTEND_PORT}:3000'
     depends_on:
-      api:
-        condition: service_healthy
+      - api
     environment:
       - WEBSITE_BASE_URL=${WEBSITE_BASE_URL}
     networks:
