@@ -17,7 +17,7 @@ services:
     ports:
       - '${POSTGRES_PORT}:5432'
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data17:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
@@ -96,6 +96,6 @@ services:
         max-file: '5'
 
 volumes:
-  postgres_data:
-    name: valentine-postgres-data
+  postgres_data12:
+    name: valentine-postgres-data12
     driver: local
