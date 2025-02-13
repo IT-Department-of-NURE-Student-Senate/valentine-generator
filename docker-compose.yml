@@ -7,14 +7,9 @@ networks:
 
 services:
   db:
-    image: 'postgres:15-alpine'
+    image: 'postgres:latest'
     container_name: valentine-db
     restart: unless-stopped
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 2G
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_DB: ${POSTGRES_DB}
@@ -46,6 +41,12 @@ services:
       - "effective_cache_size=768MB"
       - "-c"
       - "work_mem=16MB"
+      - "-c"
+      - "synchronous_commit=off"
+      - "-c"
+      - "checkpoint_timeout=1h"
+      - "-c"
+      - "max_wal_size=1GB"
       
   api:
     build: 
@@ -73,11 +74,6 @@ services:
       options:
         max-size: '20m'
         max-file: '5'
-    deploy:
-      resources:
-        limits:
-          cpus: '0.5'
-          memory: 1G
 
   client:
     build: 
@@ -98,11 +94,6 @@ services:
       options:
         max-size: '20m'
         max-file: '5'
-    deploy:
-      resources:
-        limits:
-          cpus: '0.3'
-          memory: 512M
 
 volumes:
   postgres_data:
