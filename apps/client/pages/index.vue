@@ -26,6 +26,13 @@ const { count, error, isPending } = useValentinesCount();
 const valentineStore = useValentineStore();
 const stepperStore = useStepperStore();
 
+const howItWorksSection = ref<HTMLElement | null>(null);
+
+const scrollToSection = (event: Event) => {
+  event.preventDefault();
+  howItWorksSection.value?.scrollIntoView({ behavior: 'smooth' });
+};
+
 onMounted(() => {
   valentineStore.reset();
   stepperStore.reset();
@@ -35,14 +42,14 @@ onMounted(() => {
 <template>
   <div class="flex flex-col w-full mx-auto min-h-dvh">
     <div
-      class="w-full"
+      class="w-full mt-10"
       :style="{
         background:
           'radial-gradient(94.39% 76.37% at 50% 134.15%, #E11C47 0%, #FFF 100%)',
       }"
     >
       <div
-        class="flex flex-col w-full h-dvh items-center justify-center gap-6 container"
+        class="flex flex-col w-full min-h-dvh items-center justify-center gap-6 container"
       >
         <p class="font-inter text-2xl text-center leading-relaxed">
           Створіть незабутні відчуття для своєї другої половинки <br />
@@ -59,8 +66,12 @@ onMounted(() => {
             <Icon class="size-6" name="lucide:plus" />
             Створити
           </Button>
-          <Button class="h-12 text-base" variant="outline">
-            <NuxtLink to="#how-it-works"> Як це працює? </NuxtLink>
+          <Button
+            class="h-12 text-base"
+            variant="outline"
+            @click="scrollToSection"
+          >
+            Як це працює?
           </Button>
         </div>
 
@@ -95,7 +106,9 @@ onMounted(() => {
       <div
         class="flex flex-col mx-auto md:w-2/4 w-full h-max items-center gap-6 pb-14 container"
       >
-        <h2 id="how-it-works" class="text-3xl font-excali">Як це працює?</h2>
+        <h2 ref="howItWorksSection" class="text-3xl font-excali mt-5">
+          Як це працює?
+        </h2>
 
         <GuideSteps />
 
