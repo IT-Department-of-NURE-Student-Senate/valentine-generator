@@ -42,6 +42,7 @@ export default defineNuxtConfig({
     public: {
       apiBaseUrl: 'https://love.mindenit.org/backend',
       websiteBaseUrl: 'https://love.mindenit.org',
+      isDisabled: process.env.IS_DISABLED,
     },
   },
   app: {
