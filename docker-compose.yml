@@ -17,9 +17,9 @@ services:
     ports:
       - '${POSTGRES_PORT}:5432'
     volumes:
-      - postgres_data17:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -31,25 +31,25 @@ services:
       options:
         max-size: '20m'
         max-file: '5'
-    command: 
-      - "postgres"
-      - "-c"
-      - "max_connections=200"
-      - "-c"
-      - "shared_buffers=256MB"
-      - "-c"
-      - "effective_cache_size=768MB"
-      - "-c"
-      - "work_mem=16MB"
-      - "-c"
-      - "synchronous_commit=off"
-      - "-c"
-      - "checkpoint_timeout=1h"
-      - "-c"
-      - "max_wal_size=1GB"
-      
+    command:
+      - 'postgres'
+      - '-c'
+      - 'max_connections=200'
+      - '-c'
+      - 'shared_buffers=256MB'
+      - '-c'
+      - 'effective_cache_size=768MB'
+      - '-c'
+      - 'work_mem=16MB'
+      - '-c'
+      - 'synchronous_commit=off'
+      - '-c'
+      - 'checkpoint_timeout=1h'
+      - '-c'
+      - 'max_wal_size=1GB'
+
   api:
-    build: 
+    build:
       context: ./apps/server
       dockerfile: Dockerfile
     container_name: valentine-server
@@ -76,7 +76,7 @@ services:
         max-file: '5'
 
   client:
-    build: 
+    build:
       context: ./apps/client
       dockerfile: Dockerfile
     container_name: valentine-client
@@ -96,6 +96,6 @@ services:
         max-file: '5'
 
 volumes:
-  postgres_data12:
+  postgres:
     name: valentine-postgres-data12
     driver: local
