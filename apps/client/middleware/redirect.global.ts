@@ -3,7 +3,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
   const allowedRoutes = ['/disabled'];
 
-  if (config.public.isDisabled === 'true' && !allowedRoutes.includes(to.path)) {
+  if (config.public.isDisabled && !allowedRoutes.includes(to.path)) {
     return navigateTo('/disabled');
   }
 });
