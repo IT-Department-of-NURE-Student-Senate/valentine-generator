@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production node --run db:generate-migrations && node --run db:apply-migrations && node --run start:prod",
     "start:prod": "node dist/server.js",
     "db:generate-migrations": "drizzle-kit generate",
-    "db:apply-migrations": "drizzle-kit push --verbose",
+    "db:apply-migrations": "drizzle-kit push --verbose --force",
     "db:drop-migrations": "drizzle-kit drop"
   },
   "dependencies": {
